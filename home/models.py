@@ -1,10 +1,10 @@
 from django.db import models
 
-# Create your models here.
+# This is a model which is used to store data from the API to the database.
 class Movie(models.Model):
     title = models.CharField(max_length=200)
     plot = models.TextField(max_length=500)
-    year = models.IntegerField(max_length=10)
+    year = models.IntegerField()
     rated = models.CharField(max_length=10)
     released = models.CharField(max_length=50)
     director = models.CharField(max_length=200)
@@ -14,3 +14,6 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+class AddMovie(models.Model):
+    search_field = models.CharField(max_length=20, blank=False)
