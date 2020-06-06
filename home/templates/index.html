@@ -1,7 +1,19 @@
+<p>Hello world</p>
+
 {% for item in movies %}
 
 <h3>{{ item.title }}</h3>
-<p>{{ item.year }}<br>
-{{ item.plot }}</p>
+<table>
+    <tr>
+        <td>
+            <img src="{{ item.poster }}">
+        </td>
+        <td>
+            <p>{{ item.year }}<br>
+            {{ item.plot }}</p>
+        </td>
+    </tr>
+</table>
+
 
 {% endfor %}
