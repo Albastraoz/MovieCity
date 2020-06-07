@@ -1,7 +1,8 @@
 body {
     padding-top: 66px;
     color: #fafafa;
-    background-color: #b15200;
+    background-color: #909090;
+    overflow-x: hidden;
 }
 
 .nav-settings {
