@@ -1,18 +1,29 @@
 {% extends "base.html" %}
+{% load bootstrap_tags %}
 {% block content %}
 
-    <form method="POST">
-        {% csrf_token %}
-        <label>Search for movie</label>
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group justify-content-center">
+                {{ form|as_bootstrap }}
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-primary btn-outline-secundary" value="Search">
+                </span>
+            </div>
+            
+
+        </form>
+    </div>
+</div>
+    
     {% for result in results %}
         <p>{{ result.Title }}<br>
         {{ result.imdbID }}<br>
         <form class="form" method="POST" action="{% url 'add_movie' result.imdbID %}">
             {% csrf_token %}
-            <button type="submit">Add movie</button>
+            <button type="submit" class="btn btn-primary">Add movie</button>
         </form>
 
         <img src="{{ result.Poster }}">

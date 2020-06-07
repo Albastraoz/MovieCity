@@ -5,7 +5,7 @@ import requests
 
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from .models import Movie
-from .forms import AddMovieForm
+from .forms import SearchForm
 
 # A view of the homepage which takes all objects from the database and sends them to the index.html page.
 def index(request):
@@ -14,7 +14,7 @@ def index(request):
 
 def search_movie(request):
     if request.method == "POST":
-        search_form = AddMovieForm(request.POST)
+        search_form = SearchForm(request.POST)
         if search_form.is_valid():
 
             # Setting all the variables before fetching the data from the API
@@ -28,10 +28,10 @@ def search_movie(request):
             # Put search results into json data
             search_data = search_results.json()['Search']
 
-            form = AddMovieForm()
+            form = SearchForm()
             return render(request, "search.html", {'results': search_data, 'form': form})
     else:
-        form = AddMovieForm()
+        form = SearchForm()
         return render(request, "search.html", {'form': form})
 
 def add_movie(request, id):

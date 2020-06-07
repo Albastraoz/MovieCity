@@ -14,6 +14,3 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
-
-class AddMovie(models.Model):
-    search_field = models.CharField(max_length=20, blank=False)
