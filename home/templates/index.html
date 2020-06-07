@@ -10,7 +10,9 @@
         </td>
         <td>
             <p>{{ item.year }}<br>
-            {{ item.plot }}</p>
+            {{ item.plot }}<br>
+            {{ item.id }}
+            <a href="{% url 'delete_movie' item.id %}">Delete</a></p>
         </td>
     </tr>
 </table>

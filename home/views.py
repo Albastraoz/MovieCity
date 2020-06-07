@@ -59,3 +59,9 @@ def add_movie(request, id):
 
     else:
         return redirect(reverse('search_movie'))
+
+def delete_movie(request, id):
+    # Remove a movie from the list
+    movie = get_object_or_404(Movie, id=id)
+    movie.delete()
+    return redirect(index)
