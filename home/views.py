@@ -3,7 +3,7 @@ import env
 import json
 import requests
 
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from .models import Movie
 from .forms import AddMovieForm
 
@@ -34,34 +34,28 @@ def search_movie(request):
         form = AddMovieForm()
         return render(request, "search.html", {'form': form})
 
-def add_movie(request):
+def add_movie(request, id):
     if request.method == "POST":
-        add_movie_form = AddMovieForm(request.POST)
-        if add_movie_form.is_valid():
+        # Setting API key and creating URL
+        api_key = os.getenv('API_KEY')
+        url = "http://www.omdbapi.com/?i={0}&apikey={1}".format(id, api_key)
 
-            # Setting all the variables before fetching the data from the API
-            api_key = os.getenv('API_KEY')
-            movie_id = add_movie_form.cleaned_data['search_field']
-            url = "http://www.omdbapi.com/?i={0}&apikey={1}".format(movie_id, api_key)
+        # Fetching data from API
+        data = requests.get(url)
 
-            # Fetching data from API
-            data = requests.get(url)
-
-            # Taking usefull data from API and storing it into local database
-            new_movie = Movie()
-            new_movie.title = data.json()['Title']
-            new_movie.plot = data.json()['Plot']
-            new_movie.year = data.json()['Year']
-            new_movie.rated = data.json()['Rated']
-            new_movie.released = data.json()['Released']
-            new_movie.director = data.json()['Director']
-            new_movie.poster = data.json()['Poster']
-            new_movie.imdbid = data.json()['imdbID']
-            new_movie.imdbrating = data.json()['Metascore']
-            new_movie.save()
-
-            return redirect(reverse('index'))
+        # Taking usefull data from API and storing it into local database
+        new_movie = Movie()
+        new_movie.title = data.json()['Title']
+        new_movie.plot = data.json()['Plot']
+        new_movie.year = data.json()['Year']
+        new_movie.rated = data.json()['Rated']
+        new_movie.released = data.json()['Released']
+        new_movie.director = data.json()['Director']
+        new_movie.poster = data.json()['Poster']
+        new_movie.imdbid = data.json()['imdbID']
+        new_movie.imdbrating = data.json()['Metascore']
+        new_movie.save()
+        return redirect(reverse('index'))
 
     else:
-        form = AddMovieForm()
-        return render(request, "add_movie.html", {'form': form})
+        return redirect(reverse('search_movie'))
