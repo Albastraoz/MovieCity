@@ -1,17 +1,22 @@
-<form method="POST">
-    {% csrf_token %}
-    <label>Search for movie</label>
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
-<hr>
-{% for result in results %}
-    <p>{{ result.Title }}<br>
-    {{ result.imdbID }}<br>
-    <form class="form" method="POST" action="{% url 'add_movie' result.imdbID %}">
-        {% csrf_token %}
-        <button type="submit">Add movie</button>
-    </form>
+{% extends "base.html" %}
+{% block content %}
 
-    <img src="{{ result.Poster }}">
-{% endfor %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>Search for movie</label>
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    {% for result in results %}
+        <p>{{ result.Title }}<br>
+        {{ result.imdbID }}<br>
+        <form class="form" method="POST" action="{% url 'add_movie' result.imdbID %}">
+            {% csrf_token %}
+            <button type="submit">Add movie</button>
+        </form>
+
+        <img src="{{ result.Poster }}">
+    {% endfor %}
+
+{% endblock %}
