@@ -1,0 +1,11 @@
+<form method="POST">
+    {% csrf_token %}
+    <label>Search for movie</label>
+    {{ form }}
+    <input type="submit" value="Submit">
+    <hr>
+    {% for result in results %}
+        <p>{{ result.Title }}</p>
+        <img src="{{ result.Poster }}">
+    {% endfor %}
+</form>

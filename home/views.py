@@ -12,6 +12,28 @@ def index(request):
     movies = Movie.objects.all()
     return render(request, "index.html", {"movies": movies})
 
+def search_movie(request):
+    if request.method == "POST":
+        search_form = AddMovieForm(request.POST)
+        if search_form.is_valid():
+
+            # Setting all the variables before fetching the data from the API
+            api_key = os.getenv('API_KEY')
+            search_key = search_form.cleaned_data['search_field']
+
+            # Creating URL and request data from the API
+            search_url = "http://www.omdbapi.com/?s={0}&apikey={1}".format(search_key, api_key)
+            search_results = requests.get(search_url)
+
+            # Put search results into json data
+            search_data = search_results.json()['Search']
+
+            form = AddMovieForm()
+            return render(request, "search.html", {'results': search_data, 'form': form})
+    else:
+        form = AddMovieForm()
+        return render(request, "search.html", {'form': form})
+
 def add_movie(request):
     if request.method == "POST":
         add_movie_form = AddMovieForm(request.POST)
