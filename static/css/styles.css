@@ -1,0 +1,13 @@
+body {
+    padding-top: 56px;
+    color: #fafafa;
+    background-color: #b15200;
+}
+
+.nav-settings {
+    background-color: #ffffff;
+}
+
+.nav-link {
+    display: inline-block;
+}
