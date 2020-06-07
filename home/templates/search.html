@@ -18,15 +18,22 @@
     </div>
 </div>
     
-    {% for result in results %}
-        <p>{{ result.Title }}<br>
-        {{ result.imdbID }}<br>
-        <form class="form" method="POST" action="{% url 'add_movie' result.imdbID %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Add movie</button>
-        </form>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+        {% for result in results %}
+            <div class="movie-container mx-1 mb-3">
+                <img src="{{ result.Poster }}" class="poster-settings">
+                <div class="title-setting">
+                    {{ result.Title }}
+                </div>
 
-        <img src="{{ result.Poster }}">
-    {% endfor %}
-
+                <form class="form" method="POST" action="{% url 'add_movie' result.imdbID %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary add-movie">Add movie</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    
 {% endblock %}
