@@ -5,13 +5,55 @@
     <div class="col-12 col-md-8">
         {% for item in movies %}
             <div class="movie-container mx-1 mb-3">
-                <img src="{{ item.poster }}" class="poster-settings">
+                <a href="" data-toggle="modal" data-target="#modalID{{ item.id }}">
+                    <img src="{{ item.poster }}" class="poster-settings">
+                </a>
                 <div class="title-setting">
                     {{ item.title }}
                 </div>
 
                 <a href="{% url 'delete_movie' item.id %}" class="btn btn-danger add-movie">Delete</a>
             </div>
+
+            <div class="modal fade color-black" id="modalID{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="modalID{{ item.id }}label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modalID{{ item.id }}label">{{ item.title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="d-none d-md-block col-md-4">
+                                        <img src="{{ item.poster }}" class="poster-settings-small">
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <p>
+                                            <i>Year:</i> {{ item.year }}<br>
+                                            <i>Director:</i> {{ item.director }}<br>
+                                            <i>Rating:</i> <strong>{{ item.imdbrating }}</strong>/100<br>
+                                            <i>Released:</i> {{ item.released }}<br>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <p>{{ item.plot }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <a href="{% url 'delete_movie' item.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              
         {% endfor %}
     </div>
 </div>
