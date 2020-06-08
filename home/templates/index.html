@@ -6,7 +6,9 @@
         {% for item in movies %}
             <div class="movie-container mx-1 mb-3">
                 <a href="" data-toggle="modal" data-target="#modalID{{ item.id }}">
-                    <img src="{{ item.poster }}" class="poster-settings">
+                    <div class="movie-img">
+                        <img src="{{ item.poster }}" class="poster-settings">
+                    </div>
                 </a>
                 <div class="title-setting">
                     {{ item.title }}

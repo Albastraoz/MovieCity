@@ -12,8 +12,6 @@
                     <input type="submit" class="btn btn-primary btn-outline-secundary" value="Search">
                 </span>
             </div>
-            
-
         </form>
     </div>
 </div>
@@ -21,6 +19,7 @@
 <div class="row justify-content-center">
     <div class="col-12 col-md-8">
         {% for result in results %}
+        {% if result.Poster != "N/A" %}
             <div class="movie-container mx-1 mb-3">
                 <img src="{{ result.Poster }}" class="poster-settings">
                 <div class="title-setting">
@@ -32,6 +31,7 @@
                     <button type="submit" class="btn btn-primary add-movie">Add movie</button>
                 </form>
             </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
