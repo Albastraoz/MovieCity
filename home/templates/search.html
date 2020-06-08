@@ -28,7 +28,7 @@
 
                 <form class="form" method="POST" action="{% url 'add_movie' result.imdbID %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary add-movie">Add movie</button>
+                    <button type="submit" class="btn btn-primary add-movie">Add to List</button>
                 </form>
             </div>
         {% endif %}

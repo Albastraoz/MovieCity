@@ -14,7 +14,7 @@
                     {{ item.title }}
                 </div>
 
-                <a href="{% url 'delete_movie' item.id %}" class="btn btn-danger add-movie">Delete</a>
+                <a href="{% url 'delete_movie' item.id %}" class="btn btn-danger add-movie">Remove from List</a>
             </div>
 
             <div class="modal fade color-black" id="modalID{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="modalID{{ item.id }}label" aria-hidden="true">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            <a href="{% url 'delete_movie' item.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'delete_movie' item.id %}" class="btn btn-danger">Remove from List</a>
                         </div>
                     </div>
                 </div>
