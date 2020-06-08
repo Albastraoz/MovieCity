@@ -27,14 +27,22 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="d-none d-md-block col-md-4">
+                                    <div class="d-none d-md-block col-md-3">
                                         <img src="{{ item.poster }}" class="poster-settings-small">
                                     </div>
-                                    <div class="col-12 col-md-8">
+                                    <div class="col-12 col-md-9">
                                         <p>
+                                            {% if item.rated != "N/A" %}
+                                                <strong>{{ item.rated }}</strong><br>
+                                            {% endif %}
                                             <i>Year:</i> {{ item.year }}<br>
+                                            <i>Country:</i> {{ item.country }}<br>
+                                            <i>Genre:</i> {{ item.genre }}<br>
                                             <i>Director:</i> {{ item.director }}<br>
-                                            <i>Rating:</i> <strong>{{ item.imdbrating }}</strong>/100<br>
+                                            <i>Actors:</i> {{ item.actors }}<br>
+                                            {% if item.imdbrating != "N/A" %}
+                                                <i>Rating:</i> <strong>{{ item.imdbrating }}</strong>/100<br>
+                                            {% endif %}
                                             <i>Released:</i> {{ item.released }}<br>
                                         </p>
                                     </div>

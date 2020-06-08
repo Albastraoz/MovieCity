@@ -38,7 +38,7 @@ def add_movie(request, id):
     if request.method == "POST":
         # Setting API key and creating URL
         api_key = os.getenv('API_KEY')
-        url = "http://www.omdbapi.com/?i={0}&apikey={1}".format(id, api_key)
+        url = "http://www.omdbapi.com/?i={0}&plot=full&apikey={1}".format(id, api_key)
 
         # Fetching data from API
         data = requests.get(url)
@@ -48,9 +48,12 @@ def add_movie(request, id):
         new_movie.title = data.json()['Title']
         new_movie.plot = data.json()['Plot']
         new_movie.year = data.json()['Year']
+        new_movie.country = data.json()['Country']
+        new_movie.genre = data.json()['Genre']
         new_movie.rated = data.json()['Rated']
         new_movie.released = data.json()['Released']
         new_movie.director = data.json()['Director']
+        new_movie.actors = data.json()['Actors']
         new_movie.poster = data.json()['Poster']
         new_movie.imdbid = data.json()['imdbID']
         new_movie.imdbrating = data.json()['Metascore']

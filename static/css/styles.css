@@ -17,6 +17,10 @@ body {
     display: inline-block;
 }
 
+.modal-dialog {
+    max-width: 800px;
+}
+
 .movie-container {
     position: relative;
     display: inline-block;
